@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech Converter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        textarea {
+            width: 80%;
+            height: 100px;
+            margin-bottom: 10px;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Text to Speech Converter</h1>
+        <textarea placeholder="Write anything here..."></textarea>
+        <button>Listen</button>
+    </div>
+
+    <script>
+        let speech = new SpeechSynthesisUtterance();
+
+        document.querySelector("button").addEventListener("click", () => {
+            const textToSpeak = document.querySelector("textarea").value.trim();
+
+            if (textToSpeak === "") {
+                alert("Please enter some text to speak.");
+                return;
+            }
+
+            speech.text = textToSpeak;
+            const voices = window.speechSynthesis.getVoices();
+            console.log("Available Voices:", voices);
+
+            window.speechSynthesis.speak(speech);
+        });
+    </script>
+</body>
+</html>
